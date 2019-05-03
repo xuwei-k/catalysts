@@ -41,9 +41,7 @@ trait FSuiteMatchers { self : TestKit =>
 }
 
 import scala.reflect.macros.whitebox
-import macrocompat.bundle
 
-@bundle
 class FSuiteMatchersMacros(val c: whitebox.Context)  {
   import c.universe._
 

@@ -73,7 +73,9 @@ lazy val macros    = prj(macrosM)
 lazy val macrosJVM = macrosM.jvm
 lazy val macrosJS  = macrosM.js
 lazy val macrosM   = module("macros", CrossType.Pure)
-  .settings(typelevel.macroCompatSettings(vAll):_*)
+  .settings(
+    libraryDependencies += scalaOrganization.value % "scala-reflect" % scalaVersion.value,
+  )
   .configureCross(disableScoverage210Js)
   .settings(fix2_12:_*)
 
@@ -122,7 +124,6 @@ lazy val lawkitJVM = lawkitM.jvm
 lazy val lawkitJS  = lawkitM.js
 lazy val lawkitM   = module("lawkit", CrossType.Pure)
   .dependsOn(macrosM, testkitM)
-  .settings(typelevel.macroCompatSettings(vAll):_*)
   .settings(disciplineDependencies:_*)
   .configureCross(disableScoverage210Js)
   .settings(fix2_12:_*)
@@ -145,8 +146,6 @@ lazy val testkitJVM = testkitM.jvm
 lazy val testkitJS  = testkitM.js
 lazy val testkitM   = module("testkit", CrossType.Pure)
   .dependsOn(macrosM, platformM)
-  .settings(typelevel.macroCompatSettings(vAll):_*)
-  .settings(macroAnnotationsSettings)
   .configureCross(disableScoverage210Js)
   .settings(fix2_12:_*)
 
@@ -200,6 +199,14 @@ lazy val buildSettings = localSharedBuildSettings(gh, vAll)
 
 lazy val commonSettings = sharedCommonSettings ++ Seq(
   scalacOptions ++= scalacAllOptionsFor(scalaVersion.value),
+  scalacOptions ++= {
+    CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, v)) if v <= 12 =>
+        Nil
+      case _ =>
+        Seq("-Ymacro-annotations")
+    }
+  },
   incOptions := incOptions.value.withLogRecompileOnMacro(false),
   parallelExecution in Test := false,
   developers := List(Developer("Alistair Johnson", "BennyHill", "", new java.net.URL("https://bh.example")))

@@ -4,8 +4,6 @@ package macros
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox
 
-import macrocompat.bundle
-
 object ClassInfo {
   def className(that: Any): String = macro ClassInfoMacros.classNameImpl
 }
@@ -13,7 +11,6 @@ object ClassInfo {
 /**
  * Do not use this directly, rather [[catalysts.macros.ClassInfo]]
  */
-@bundle
 class ClassInfoMacros(val c: whitebox.Context) {
   import c.universe._
 

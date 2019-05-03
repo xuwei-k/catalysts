@@ -10,7 +10,6 @@ object Dependencies {
   // Versions for libraries and packages
   // Package -> version
   val versions = Map[String, String](
-   // "macro-compat"   -> "1.0.44"
    "discipline"     -> "0.10.0",
    "scalacheck"     -> "1.14.0",
    "scalatest"      -> "3.0.6-SNAP4",
@@ -30,9 +29,4 @@ object Dependencies {
   val scalacPlugins = Map[String, (String, String, String, CrossVersion)](
     // "kind-projector"    -> ("kind-projector"  , "org.spire-math"      , "kind-projector" , CrossVersion.binary)
   )
-
-  // Some helper methods to combine libraries
- // def macroCompatSettings(v: Versions): Seq[Setting[_]] =
- //   addCompileLibs(v, "macro-compat")  ++  addCompilerPlugins(v, "paradise") ++
- //     scalaMacroDependencies(v)
 }
