@@ -29,9 +29,7 @@ trait WSpecMatchers { self: TestKit =>
 }
 
 import scala.reflect.macros.whitebox
-import macrocompat.bundle
 
-@bundle
 class WSpecMatchersMacros(val c: whitebox.Context)  {
   import c.universe._
 

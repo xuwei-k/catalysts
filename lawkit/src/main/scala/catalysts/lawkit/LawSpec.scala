@@ -6,7 +6,6 @@ import org.scalacheck.{Shrink, Arbitrary}
 
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox
-import macrocompat.bundle
 
 trait LawSpec { self: LawKit with TestKit =>
 
@@ -62,7 +61,6 @@ trait LawSpec { self: LawKit with TestKit =>
     macro LawSpecMacros.forAll6[T1, T2, T3,T4, T5, T6, R]
 }
 
-@bundle
 class LawSpecMacros(val c: whitebox.Context) {
 
   import c.universe._

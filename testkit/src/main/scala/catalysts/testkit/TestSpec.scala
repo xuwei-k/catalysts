@@ -4,7 +4,6 @@ package testkit
 import scala.reflect.ClassTag
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox
-import macrocompat.bundle
 
 trait TestSpec { self: TestKit =>
 
@@ -34,7 +33,6 @@ trait TestSpec { self: TestKit =>
     macro TestSpecMacros.assert_Throw[A, T]
 }
 
-@bundle
 class TestSpecMacros(val c: whitebox.Context)  {
   import c.universe._
 

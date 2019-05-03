@@ -5,7 +5,6 @@ package junit
 
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox
-import macrocompat.bundle
 
 import scala.annotation.StaticAnnotation
 
@@ -16,7 +15,6 @@ class Test extends StaticAnnotation {
   def macroTransform(annottees: Any*): Any = macro TestMacro.impl
 }
 
-@bundle
 class TestMacro(val c: whitebox.Context) {
 
   import c.universe._
